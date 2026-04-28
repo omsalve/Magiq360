@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magiq360 | Quidich Innovation Labs | 2024</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 40px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(8, 8, 8, 0.96);
+    backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo area */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.logo-img {
+    height: 46px;
+    width: auto;
+    display: block;
+}
+
+/* Fallback shown when image fails to load (controlled via JS) */
+.logo-text-fallback {
+    display: none;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-text-fallback.show {
+    display: flex;
+}
+
+.logo-brand {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.35);
+    margin: 0 20px;
+}
+
+.nav-tagline {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    color: rgba(255, 255, 255, 0.88);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Nav right */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.hire-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 26px;
+    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.hire-btn:hover {
+    background: #ffffff;
+    color: #0a0a0a;
+}
+
+/* Hamburger */
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: #ffffff;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100vh;
+    background: #111111;
+    z-index: 999;
+    transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 90px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-shadow: -4px 0 30px rgba(0,0,0,0.5);
+}
+
+.mobile-menu.open {
+    right: 0;
+}
+
+.mobile-menu a {
+    color: rgba(255,255,255,0.88);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.2s;
+}
+
+.mobile-menu a:hover {
+    color: #c8900c;
+}
+
+/* ============================================================
+   HERO — THREE PANEL
+   ============================================================ */
+.hero {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+}
+
+/* Side panels */
+.hero-panel {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-left  { background: #0d1b4a; }
+.hero-right { background: #2a1550; }
+
+/* Vertical "TO 9:16" label */
+.vertical-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.82;
+    user-select: none;
+    pointer-events: none;
+}
+
+.vertical-label span {
+    font-size: clamp(70px, 9vw, 140px);
+    font-weight: 900;
+    color: #b0e030;
+    letter-spacing: -3px;
+    display: block;
+    text-align: center;
+    line-height: 0.88;
+}
+
+.label-gap {
+    height: clamp(14px, 2vw, 28px);
+    display: block;
+    font-size: 0 !important;
+}
+
+/* Center video column */
+.hero-video {
+    flex: 0 0 42%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-video img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-video.hero-video-placeholder {
+    background: #111;
+}
+
+.hero-video.hero-video-placeholder::after {
+    content: 'Hero Image';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(200,144,12,0.5);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   PAGE CONTENT WRAPPER
+   ============================================================ */
+.page-content {
+    background: #0a0a0a;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb-wrap {
+    padding: 22px 60px 0;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+}
+
+.breadcrumb a {
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: #c8900c;
+}
+
+.bc-dot {
+    color: rgba(255,255,255,0.4);
+    font-size: 8px;
+}
+
+.bc-current {
+    color: rgba(255,255,255,0.88);
+}
+
+/* ============================================================
+   QUICKFLIP INTRO
+   ============================================================ */
+.qf-intro {
+    padding: 56px 60px 44px;
+    text-align: center;
+}
+
+.qf-title {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+.gold-line {
+    width: 110px;
+    height: 3px;
+    background: #c8900c;
+    margin: 0 auto 30px;
+}
+
+.qf-desc {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.75;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   FEATURES
+   ============================================================ */
+.features {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px 70px;
+}
+
+.feat-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.13);
+}
+
+.feat-row {
+    display: flex;
+    align-items: center;
+    padding: 42px 0;
+    gap: 0;
+}
+
+/* Icon column */
+.feat-icon-col {
+    flex: 0 0 82px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feat-icon {
+    width: 66px;
+    height: 66px;
+    flex-shrink: 0;
+}
+
+/* Vertical gold separator — scroll-driven progress indicator */
+.feat-vline {
+    flex: 0 0 2px;
+    width: 2px;
+    height: 72px;
+    background: #c8900c;
+    margin: 0 30px;
+    flex-shrink: 0;
+    transform: scaleY(0);
+    transform-origin: top center;
+    will-change: transform;
+}
+
+/* Text block */
+.feat-text {
+    flex: 1;
+}
+
+.feat-title {
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+}
+
+.feat-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.65;
+}
+
+/* ============================================================
+   SECTION HEADING (shared)
+   ============================================================ */
+.sec-heading {
+    font-size: clamp(32px, 3.5vw, 50px);
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+}
+
+/* ============================================================
+   PHOTO GALLERY
+   ============================================================ */
+.gallery-section {
+    padding: 70px 60px 60px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    text-align: center;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+.photo-cell {
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.photo-cell img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.photo-cell:hover img {
+    transform: scale(1.03);
+}
+
+/* Placeholder style when image fails */
+.photo-cell.photo-placeholder {
+    height: 230px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(200,144,12,0.3);
+}
+
+.photo-cell.photo-placeholder::after {
+    content: 'Gallery Image';
+    color: rgba(200,144,12,0.5);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.photo-watermark {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.photo-watermark img {
+    height: 20px;
+    width: auto;
+    opacity: 0.9;
+}
+
+/* ============================================================
+   VIDEO GALLERY
+   ============================================================ */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+.video-cell {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.video-cell iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* ============================================================
+   RECENT PROJECTS
+   ============================================================ */
+.projects-section {
+    padding: 60px 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-section > .sec-heading {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.projects-list {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.project-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    padding: 50px 0;
+    border-bottom: none;
+}
+
+/* Project image */
+.proj-img-col {
+    position: relative;
+    overflow: hidden;
+    background: #1c1c1c;
+}
+
+.proj-img-col img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.proj-img-col:hover img {
+    transform: scale(1.02);
+}
+
+/* Placeholder when image is missing */
+.proj-img-col.proj-img-placeholder {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255,255,255,0.15);
+}
+
+.proj-img-col.proj-img-placeholder::after {
+    content: 'Project Image';
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Project text column */
+.proj-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 4px;
+}
+
+.proj-gold-accent {
+    width: 90px;
+    height: 3px;
+    background: #c8900c;
+}
+
+.proj-tag {
+    display: inline-block;
+    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    padding: 5px 14px;
+    align-self: flex-start;
+}
+
+.proj-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.85;
+    text-align: justify;
+}
+
+/* ============================================================
+   PAGINATION
+   ============================================================ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 52px;
+}
+
+.next-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 54px;
+    border: 1.5px solid rgba(255,255,255,0.8);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background 0.2s ease;
+}
+
+.next-btn:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ============================================================
+   SCROLL TO TOP BUTTON
+   ============================================================ */
+.scroll-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(40, 40, 40, 0.88);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s, visibility 0.3s, background 0.2s;
+    z-index: 200;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.scroll-top:hover {
+    background: rgba(70, 70, 70, 0.95);
+}
+
+.scroll-top svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (≤1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0 28px;
+    }
+
+    .breadcrumb-wrap { padding: 20px 32px 0; }
+    .qf-intro        { padding: 48px 32px 36px; }
+    .features        { padding: 0 32px 56px; }
+    .gallery-section { padding: 56px 32px 48px; }
+    .projects-section { padding: 50px 32px 64px; }
+
+    .project-row {
+        gap: 36px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (≤768px)
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar { padding: 0 18px; height: 60px; }
+    .nav-divider  { display: none; }
+    .nav-tagline  { display: none; }
+    .hire-btn     { padding: 7px 16px; font-size: 10px; letter-spacing: 1.5px; }
+
+    /* Hero */
+    .hero {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero-panel {
+        padding: 28px 16px;
+        min-height: 180px;
+    }
+
+    .hero-video {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 240px;
+        position: relative;
+    }
+
+    .vertical-label span {
+        font-size: 52px;
+    }
+
+    /* Content */
+    .breadcrumb-wrap { padding: 18px 20px 0; }
+    .qf-intro        { padding: 40px 20px 30px; }
+    .features        { padding: 0 20px 40px; }
+
+    .feat-row {
+        flex-wrap: wrap;
+        padding: 30px 0;
+        gap: 16px;
+    }
+
+    .feat-icon-col {
+        flex: 0 0 56px;
+    }
+
+    .feat-vline {
+        height: 56px;
+        margin: 0 18px;
+    }
+
+    /* Gallery */
+    .gallery-section { padding: 50px 20px 40px; }
+    .video-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    /* Projects */
+    .projects-section { padding: 40px 20px 60px; }
+
+    .project-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 36px 0;
+    }
+
+    .proj-desc { text-align: left; }
+
+    .next-btn { padding: 14px 36px; }
+
+    .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+}
+
+/* ============================================================
+   RESPONSIVE — SMALL MOBILE (≤480px)
+   ============================================================ */
+@media (max-width: 480px) {
+    .vertical-label span { font-size: 38px; }
+    .label-gap { height: 12px; }
+    .hero-panel { min-height: 140px; }
+    .hero-video { height: 200px; }
+}
+    </style>
+</head>
+<body>
+
+    <!-- ======================== NAVBAR ======================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">
+                <!-- Replace src with actual logo asset -->
+                <img src="assets/quidich-logo.png" alt="Quidich" class="logo-img" onerror="this.style.display='none'">
+                <div class="logo-text-fallback" id="logoFallback">
+                    <span class="logo-brand">QUIDICH</span>
+                </div>
+                <div class="nav-divider"></div>
+                <span class="nav-tagline">TRANSFORMING SPORTS BROADCAST</span>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="hire-btn">HIRE US</a>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Magiq360</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <!-- ======================== HERO: THREE-PANEL VIDEO ======================== -->
+    <section class="hero">
+        <div class="hero-panel hero-left">
+            <div class="vertical-label">
+                <span>C</span>
+                <span>A</span>
+                <span>M</span>
+                <span class="label-gap"></span>
+                <span>F</span>
+                <span>L</span>
+                <span>Y</span>
+            </div>
+        </div>
+
+        <div class="hero-video">
+            <!-- Replace src with actual hero image asset, e.g. assets/hero-bg.jpg -->
+            <img src="assets/hero-bg.jpg" alt="Magiq360 | Quidich Innovation Labs | 2024"
+                 onerror="this.parentElement.classList.add('hero-video-placeholder')">
+        </div>
+
+        <div class="hero-panel hero-right">
+            <div class="vertical-label">
+                <span>C</span>
+                <span>A</span>
+                <span>M</span>
+                <span class="label-gap"></span>
+                <span>F</span>
+                <span>L</span>
+                <span>Y</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================== MAGIQ360 PAGE CONTENT ======================== -->
+    <main class="page-content">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-wrap">
+            <nav class="breadcrumb">
+                <a href="#">HOME</a>
+                <span class="bc-dot">•</span>
+                <a href="#">SERVICES</a>
+                <span class="bc-dot">•</span>
+                <span class="bc-current">MAGIQ360</span>
+            </nav>
+        </div>
+
+        <!-- Title + Description -->
+        <section class="qf-intro">
+            <h1 class="qf-title">Magiq360</h1>
+            <div class="gold-line"></div>
+            <p class="qf-desc">
+                Magiq360 is an AI video engine that introduces cinematic, spatial camera movements to live cricket<br>
+                broadcasting — freezing pivotal moments in time and seamlessly flying the viewer's perspective<br>
+                from one camera angle to another, delivering unparalleled visual storytelling
+            </p>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+
+            <div class="feat-divider"></div>
+
+            <!-- Cinematic Action Replays -->
+            <div class="feat-row">
+                <div class="feat-icon-col">
+                    <svg class="feat-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Clapperboard body -->
+                        <rect x="10" y="22" width="50" height="36" rx="2" stroke="#c8900c" stroke-width="2"/>
+                        <!-- Clapperboard top bar -->
+                        <rect x="10" y="14" width="50" height="10" rx="1" stroke="#c8900c" stroke-width="2"/>
+                        <!-- Clapper stripes on top bar -->
+                        <line x1="22" y1="14" x2="18" y2="24" stroke="#c8900c" stroke-width="2"/>
+                        <line x1="32" y1="14" x2="28" y2="24" stroke="#c8900c" stroke-width="2"/>
+                        <line x1="42" y1="14" x2="38" y2="24" stroke="#c8900c" stroke-width="2"/>
+                        <line x1="52" y1="14" x2="48" y2="24" stroke="#c8900c" stroke-width="2"/>
+                        <!-- Play triangle inside body -->
+                        <polygon points="27,31 27,47 43,39" fill="#c8900c" opacity="0.85"/>
+                        <!-- Hinge dot -->
+                        <circle cx="10" cy="14" r="3" fill="#c8900c"/>
+                    </svg>
+                </div>
+                <div class="feat-vline"></div>
+                <div class="feat-text">
+                    <h3 class="feat-title">Cinematic Action Replays</h3>
+                    <p class="feat-desc">Transforms standard replays into captivating, high-end cinematic sequences. By centering on key moments and panning across the best perspectives while the action is paused, it elevates the drama of the game</p>
+                </div>
+            </div>
+
+            <div class="feat-divider"></div>
+
+            <!-- Universal Camera Compatibility -->
+            <div class="feat-row">
+                <div class="feat-icon-col">
+                    <svg class="feat-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Camera body -->
+                        <rect x="8" y="22" width="46" height="32" rx="3" stroke="#c8900c" stroke-width="2"/>
+                        <!-- Viewfinder notch top-left -->
+                        <path d="M18 22 L18 16 L26 22" stroke="#c8900c" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                        <!-- Lens outer circle -->
+                        <circle cx="31" cy="38" r="11" stroke="#c8900c" stroke-width="2"/>
+                        <!-- Lens inner circle -->
+                        <circle cx="31" cy="38" r="6" stroke="#c8900c" stroke-width="1.5"/>
+                        <!-- Lens dot -->
+                        <circle cx="31" cy="38" r="2" fill="#c8900c"/>
+                        <!-- Flash / indicator top right -->
+                        <rect x="44" y="16" width="10" height="7" rx="1" stroke="#c8900c" stroke-width="1.5"/>
+                        <!-- Video feed arrows: right side -->
+                        <line x1="58" y1="30" x2="64" y2="30" stroke="#c8900c" stroke-width="1.5"/>
+                        <polygon points="64,27 68,30 64,33" fill="#c8900c"/>
+                        <line x1="58" y1="40" x2="64" y2="40" stroke="#c8900c" stroke-width="1.5"/>
+                        <polygon points="64,37 68,40 64,43" fill="#c8900c"/>
+                    </svg>
+                </div>
+                <div class="feat-vline"></div>
+                <div class="feat-text">
+                    <h3 class="feat-title">Universal Camera Compatibility</h3>
+                    <p class="feat-desc">Camera Fly is completely camera-agnostic. It works with the broadcaster's existing camera layout, working on any existing camera feed without additional hardware or infrastructure changes</p>
+                </div>
+            </div>
+
+            <div class="feat-divider"></div>
+
+            <!-- Live-Production Speed -->
+            <div class="feat-row">
+                <div class="feat-icon-col">
+                    <svg class="feat-icon" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Clock face -->
+                        <circle cx="35" cy="36" r="24" stroke="#c8900c" stroke-width="2"/>
+                        <!-- Clock hands -->
+                        <line x1="35" y1="36" x2="35" y2="18" stroke="#c8900c" stroke-width="2.2" stroke-linecap="round"/>
+                        <line x1="35" y1="36" x2="48" y2="44" stroke="#c8900c" stroke-width="2.2" stroke-linecap="round"/>
+                        <!-- Center dot -->
+                        <circle cx="35" cy="36" r="2.5" fill="#c8900c"/>
+                        <!-- Speed lightning bolt overlay (bottom right) -->
+                        <polygon points="42,44 36,54 40,54 34,66 50,50 44,50" fill="#c8900c" opacity="0.9"/>
+                        <!-- Tick marks at 12, 3, 6, 9 -->
+                        <line x1="35" y1="14" x2="35" y2="18" stroke="#c8900c" stroke-width="2"/>
+                        <line x1="57" y1="36" x2="53" y2="36" stroke="#c8900c" stroke-width="2"/>
+                        <line x1="35" y1="58" x2="35" y2="54" stroke="#c8900c" stroke-width="2"/>
+                        <line x1="13" y1="36" x2="17" y2="36" stroke="#c8900c" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="feat-vline"></div>
+                <div class="feat-text">
+                    <h3 class="feat-title">Live-Production Speed</h3>
+                    <p class="feat-desc">Designed specifically for the high-pressure environment of live cricket. The AI generation is optimised for fast turnaround, ensuring directors can deploy Camera Fly sequences without disrupting the broadcast flow</p>
+                </div>
+            </div>
+
+            <div class="feat-divider"></div>
+        </section>
+
+        <!-- ======================== VIDEO GALLERY ======================== -->
+        <section class="gallery-section">
+            <h2 class="sec-heading">Video Gallery</h2>
+            <div class="gold-line"></div>
+            <div class="video-grid">
+                <!-- Replace VIDEO_ID_1/2/3 with actual YouTube video IDs -->
+                <div class="video-cell">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0&modestbranding=1"
+                        title="Magiq360 — Video 1"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-cell">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0&modestbranding=1"
+                        title="Magiq360 — Video 2"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-cell">
+                    <iframe
+                        src="https://www.youtube.com/embed/VIDEO_ID_3?rel=0&modestbranding=1"
+                        title="Magiq360 — Video 3"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================== RECENT PROJECTS ======================== -->
+        <section class="projects-section">
+            <h2 class="sec-heading">Recent Projects</h2>
+
+            <div class="projects-list">
+
+                <!-- Project 1 -->
+                <div class="project-row">
+                    <div class="proj-img-col">
+                        <!--
+                            Replace with actual project image: assets/project-1.jpg
+                            (e.g. KKR diving catch — Camera Fly close-up angle)
+                        -->
+                        <img src="assets/project-1.jpg" alt="Magiq360 — KKR diving catch, IPL 2024"
+                             onerror="this.parentElement.classList.add('proj-img-placeholder')">
+                    </div>
+                    <div class="proj-text-col">
+                        <div class="proj-gold-accent"></div>
+                        <span class="proj-tag">MAGIQ360</span>
+                        <p class="proj-desc">Magiq360's Camera Fly technology captured a spectacular diving catch during the IPL 2024 season, synthetically generating intermediate frames between two separate camera feeds to deliver a seamless cinematic transition that froze the moment in time from multiple perspectives.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-row">
+                    <div class="proj-img-col">
+                        <img src="assets/project-2.jpg" alt="Magiq360 — Wide-angle fielding replay, IPL 2024"
+                             onerror="this.parentElement.classList.add('proj-img-placeholder')">
+                    </div>
+                    <div class="proj-text-col">
+                        <span class="proj-tag">MAGIQ360</span>
+                        <p class="proj-desc">Quidich demonstrates how Magiq360 transforms a standard fielding replay into a high-end cinematic sequence — panning across the best available camera perspectives while the action is frozen, elevating the visual drama for broadcast audiences worldwide.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-row">
+                    <div class="proj-img-col">
+                        <img src="assets/project-3.jpg" alt="Magiq360 — Multi-angle run-out transition, IPL 2024"
+                             onerror="this.parentElement.classList.add('proj-img-placeholder')">
+                    </div>
+                    <div class="proj-text-col">
+                        <span class="proj-tag">MAGIQ360</span>
+                        <p class="proj-desc">Quidich showcases how Magiq360's AI engine works seamlessly with a broadcaster's existing camera layout — requiring no additional hardware — to produce live, camera-agnostic cinematic transitions that are optimised for the high-pressure demands of live cricket production.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="next-btn">NEXT &nbsp;&rarr;</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 15L12 9L18 15" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script>
+(function () {
+    'use strict';
+
+    const navbar      = document.getElementById('navbar');
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobileMenu');
+    const scrollTopBtn = document.getElementById('scrollTop');
+    const logoImg     = document.querySelector('.logo-img');
+    const logoFallback = document.getElementById('logoFallback');
+
+    /* ── Logo fallback ──────────────────────────────────────── */
+    if (logoImg) {
+        logoImg.addEventListener('error', function () {
+            this.style.display = 'none';
+            if (logoFallback) logoFallback.classList.add('show');
+        });
+    }
+
+    /* ── Navbar: transparent → solid on scroll ──────────────── */
+    function updateNavbar() {
+        if (window.scrollY > 40) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+
+    /* ── Scroll-to-top visibility ───────────────────────────── */
+    function updateScrollBtn() {
+        if (window.scrollY > 450) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    }
+
+    /* ── Feature-row scroll progress lines ─────────────────── */
+    const featRows = Array.from(document.querySelectorAll('.feat-row'));
+
+    function updateFeatureLines() {
+        if (!featRows.length) return;
+        const scrollY = window.scrollY;
+        const vh = window.innerHeight;
+
+        featRows.forEach(function (row, i) {
+            const vline = row.querySelector('.feat-vline');
+            if (!vline) return;
+
+            const rowTop = row.getBoundingClientRect().top + scrollY;
+            const start  = rowTop - vh;
+
+            let end;
+            if (i < featRows.length - 1) {
+                end = featRows[i + 1].getBoundingClientRect().top + scrollY - vh;
+            } else {
+                end = rowTop + row.offsetHeight - vh * 0.5;
+            }
+
+            const progress = Math.max(0, Math.min(1, (scrollY - start) / (end - start)));
+            vline.style.transform = 'scaleY(' + progress + ')';
+        });
+    }
+
+    window.addEventListener('scroll', function () {
+        updateNavbar();
+        updateScrollBtn();
+        updateFeatureLines();
+    }, { passive: true });
+
+    /* Run once on load in case page is already scrolled */
+    updateNavbar();
+    updateScrollBtn();
+    updateFeatureLines();
+
+    /* ── Scroll to top click ────────────────────────────────── */
+    scrollTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ── Hamburger / mobile menu ────────────────────────────── */
+    hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+    });
+
+    /* Close menu when clicking outside */
+    document.addEventListener('click', function (e) {
+        if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+        }
+    });
+
+    /* Close menu on link click */
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+            mobileMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+        });
+    });
+
+})();
+    </script>
+</body>
+</html>

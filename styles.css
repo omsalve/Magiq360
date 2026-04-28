@@ -1,0 +1,796 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 40px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(8, 8, 8, 0.96);
+    backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo area */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.logo-img {
+    height: 46px;
+    width: auto;
+    display: block;
+}
+
+/* Fallback shown when image fails to load (controlled via JS) */
+.logo-text-fallback {
+    display: none;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-text-fallback.show {
+    display: flex;
+}
+
+.logo-brand {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.35);
+    margin: 0 20px;
+}
+
+.nav-tagline {
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    color: rgba(255, 255, 255, 0.88);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Nav right */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.hire-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 26px;
+    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.hire-btn:hover {
+    background: #ffffff;
+    color: #0a0a0a;
+}
+
+/* Hamburger */
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: #ffffff;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100vh;
+    background: #111111;
+    z-index: 999;
+    transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 90px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-shadow: -4px 0 30px rgba(0,0,0,0.5);
+}
+
+.mobile-menu.open {
+    right: 0;
+}
+
+.mobile-menu a {
+    color: rgba(255,255,255,0.88);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.2s;
+}
+
+.mobile-menu a:hover {
+    color: #c8900c;
+}
+
+/* ============================================================
+   HERO — THREE PANEL
+   ============================================================ */
+.hero {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+}
+
+/* Side panels */
+.hero-panel {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-left  { background: #0d1b4a; }
+.hero-right { background: #2a1550; }
+
+/* Vertical "TO 9:16" label */
+.vertical-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.82;
+    user-select: none;
+    pointer-events: none;
+}
+
+.vertical-label span {
+    font-size: clamp(70px, 9vw, 140px);
+    font-weight: 900;
+    color: #b0e030;
+    letter-spacing: -3px;
+    display: block;
+    text-align: center;
+    line-height: 0.88;
+}
+
+.label-gap {
+    height: clamp(14px, 2vw, 28px);
+    display: block;
+    font-size: 0 !important;
+}
+
+/* Center video column */
+.hero-video {
+    flex: 0 0 42%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-video img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-video.hero-video-placeholder {
+    background: #111;
+}
+
+.hero-video.hero-video-placeholder::after {
+    content: 'Hero Image';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(200,144,12,0.5);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   PAGE CONTENT WRAPPER
+   ============================================================ */
+.page-content {
+    background: #0a0a0a;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb-wrap {
+    padding: 22px 60px 0;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+}
+
+.breadcrumb a {
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: #c8900c;
+}
+
+.bc-dot {
+    color: rgba(255,255,255,0.4);
+    font-size: 8px;
+}
+
+.bc-current {
+    color: rgba(255,255,255,0.88);
+}
+
+/* ============================================================
+   QUICKFLIP INTRO
+   ============================================================ */
+.qf-intro {
+    padding: 56px 60px 44px;
+    text-align: center;
+}
+
+.qf-title {
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+}
+
+.gold-line {
+    width: 110px;
+    height: 3px;
+    background: #c8900c;
+    margin: 0 auto 30px;
+}
+
+.qf-desc {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.75;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   FEATURES
+   ============================================================ */
+.features {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px 70px;
+}
+
+.feat-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.13);
+}
+
+.feat-row {
+    display: flex;
+    align-items: center;
+    padding: 42px 0;
+    gap: 0;
+}
+
+/* Icon column */
+.feat-icon-col {
+    flex: 0 0 82px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feat-icon {
+    width: 66px;
+    height: 66px;
+    flex-shrink: 0;
+}
+
+/* Vertical gold separator — scroll-driven progress indicator */
+.feat-vline {
+    flex: 0 0 2px;
+    width: 2px;
+    height: 72px;
+    background: #c8900c;
+    margin: 0 30px;
+    flex-shrink: 0;
+    transform: scaleY(0);
+    transform-origin: top center;
+    will-change: transform;
+}
+
+/* Text block */
+.feat-text {
+    flex: 1;
+}
+
+.feat-title {
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+}
+
+.feat-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.65;
+}
+
+/* ============================================================
+   SECTION HEADING (shared)
+   ============================================================ */
+.sec-heading {
+    font-size: clamp(32px, 3.5vw, 50px);
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+}
+
+/* ============================================================
+   PHOTO GALLERY
+   ============================================================ */
+.gallery-section {
+    padding: 70px 60px 60px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    text-align: center;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+.photo-cell {
+    position: relative;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.photo-cell img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.photo-cell:hover img {
+    transform: scale(1.03);
+}
+
+/* Placeholder style when image fails */
+.photo-cell.photo-placeholder {
+    height: 230px;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(200,144,12,0.3);
+}
+
+.photo-cell.photo-placeholder::after {
+    content: 'Gallery Image';
+    color: rgba(200,144,12,0.5);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.photo-watermark {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.photo-watermark img {
+    height: 20px;
+    width: auto;
+    opacity: 0.9;
+}
+
+/* ============================================================
+   VIDEO GALLERY
+   ============================================================ */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: 40px auto 0;
+}
+
+.video-cell {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.video-cell iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* ============================================================
+   RECENT PROJECTS
+   ============================================================ */
+.projects-section {
+    padding: 60px 60px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-section > .sec-heading {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.projects-list {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.project-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    padding: 50px 0;
+    border-bottom: none;
+}
+
+/* Project image */
+.proj-img-col {
+    position: relative;
+    overflow: hidden;
+    background: #1c1c1c;
+}
+
+.proj-img-col img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.proj-img-col:hover img {
+    transform: scale(1.02);
+}
+
+/* Placeholder when image is missing */
+.proj-img-col.proj-img-placeholder {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(255,255,255,0.15);
+}
+
+.proj-img-col.proj-img-placeholder::after {
+    content: 'Project Image';
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Project text column */
+.proj-text-col {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 4px;
+}
+
+.proj-gold-accent {
+    width: 90px;
+    height: 3px;
+    background: #c8900c;
+}
+
+.proj-tag {
+    display: inline-block;
+    border: 1.5px solid #ffffff;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    padding: 5px 14px;
+    align-self: flex-start;
+}
+
+.proj-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.85;
+    text-align: justify;
+}
+
+/* ============================================================
+   PAGINATION
+   ============================================================ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 52px;
+}
+
+.next-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 54px;
+    border: 1.5px solid rgba(255,255,255,0.8);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background 0.2s ease;
+}
+
+.next-btn:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ============================================================
+   SCROLL TO TOP BUTTON
+   ============================================================ */
+.scroll-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(40, 40, 40, 0.88);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s, visibility 0.3s, background 0.2s;
+    z-index: 200;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.scroll-top:hover {
+    background: rgba(70, 70, 70, 0.95);
+}
+
+.scroll-top svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================================
+   RESPONSIVE — TABLET (≤1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0 28px;
+    }
+
+    .breadcrumb-wrap { padding: 20px 32px 0; }
+    .qf-intro        { padding: 48px 32px 36px; }
+    .features        { padding: 0 32px 56px; }
+    .gallery-section { padding: 56px 32px 48px; }
+    .projects-section { padding: 50px 32px 64px; }
+
+    .project-row {
+        gap: 36px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE (≤768px)
+   ============================================================ */
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar { padding: 0 18px; height: 60px; }
+    .nav-divider  { display: none; }
+    .nav-tagline  { display: none; }
+    .hire-btn     { padding: 7px 16px; font-size: 10px; letter-spacing: 1.5px; }
+
+    /* Hero */
+    .hero {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero-panel {
+        padding: 28px 16px;
+        min-height: 180px;
+    }
+
+    .hero-video {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 240px;
+        position: relative;
+    }
+
+    .vertical-label span {
+        font-size: 52px;
+    }
+
+    /* Content */
+    .breadcrumb-wrap { padding: 18px 20px 0; }
+    .qf-intro        { padding: 40px 20px 30px; }
+    .features        { padding: 0 20px 40px; }
+
+    .feat-row {
+        flex-wrap: wrap;
+        padding: 30px 0;
+        gap: 16px;
+    }
+
+    .feat-icon-col {
+        flex: 0 0 56px;
+    }
+
+    .feat-vline {
+        height: 56px;
+        margin: 0 18px;
+    }
+
+    /* Gallery */
+    .gallery-section { padding: 50px 20px 40px; }
+    .video-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    /* Projects */
+    .projects-section { padding: 40px 20px 60px; }
+
+    .project-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 36px 0;
+    }
+
+    .proj-desc { text-align: left; }
+
+    .next-btn { padding: 14px 36px; }
+
+    .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+}
+
+/* ============================================================
+   RESPONSIVE — SMALL MOBILE (≤480px)
+   ============================================================ */
+@media (max-width: 480px) {
+    .vertical-label span { font-size: 38px; }
+    .label-gap { height: 12px; }
+    .hero-panel { min-height: 140px; }
+    .hero-video { height: 200px; }
+}
