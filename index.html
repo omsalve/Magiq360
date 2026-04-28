@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magiq360 | Quidich Innovation Labs | 2024</title>
+    <title>Magiq360 | Quidich Innovation Labs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:wght@300;400;500;600;700&family=Roboto+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -158,77 +158,6 @@ a {
     color: var(--dark);
 }
 
-/* Hamburger */
-.hamburger {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    padding: 4px;
-    width: 32px;
-    height: 32px;
-}
-
-.hamburger span {
-    display: block;
-    width: 26px;
-    height: 2px;
-    background: #ffffff;
-    transition: transform 0.3s, opacity 0.3s;
-    transform-origin: center;
-}
-
-.hamburger.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-.hamburger.open span:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
-}
-.hamburger.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-/* ============================================================
-   MOBILE MENU
-   ============================================================ */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 280px;
-    height: 100vh;
-    background: var(--dark);
-    z-index: 999;
-    transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 90px 32px 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    box-shadow: -4px 0 30px rgba(0,0,0,0.5);
-}
-
-.mobile-menu.open {
-    right: 0;
-}
-
-.mobile-menu a {
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    transition: color 0.2s;
-}
-
-.mobile-menu a:hover {
-    color: var(--main-color);
-}
 
 /* ============================================================
    HERO — THREE PANEL
@@ -236,8 +165,6 @@ a {
 .hero {
     display: flex;
     width: 100%;
-    height: 100vh;
-    min-height: 560px;
     overflow: hidden;
 }
 
@@ -283,8 +210,15 @@ a {
 .hero-video {
     flex: 1 1 100%;
     position: relative;
-    overflow: hidden;
     background: #000;
+}
+
+.hero-video video {
+    position: static !important;  /* override the inline style */
+    width: 100% !important;
+    height: auto !important;
+    object-fit: unset !important;
+    display: block;
 }
 
 .hero-video img {
@@ -835,19 +769,14 @@ a {
    RESPONSIVE — TABLET (≤1024px)
    ============================================================ */
 @media (max-width: 1024px) {
-    .navbar {
-        padding: 0 28px;
-    }
-
-    .breadcrumb-wrap { padding: 20px 32px 0; }
-    .qf-intro        { padding: 48px 32px 36px; }
-    .features        { padding: 0 32px 56px; }
-    .gallery-section { padding: 56px 32px 48px; }
+    .navbar           { padding: 0 28px; }
+    .breadcrumb-wrap  { padding: 20px 32px 0; }
+    .qf-intro         { padding: 48px 32px 36px; }
+    .features         { padding: 0 32px 56px; }
+    .gallery-section  { padding: 56px 32px 48px; }
     .projects-section { padding: 50px 32px 64px; }
-
-    .project-row {
-        gap: 36px;
-    }
+    .project-row      { gap: 36px; }
+    .photo-grid       { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ============================================================
@@ -855,69 +784,57 @@ a {
    ============================================================ */
 @media (max-width: 768px) {
     /* Navbar */
-    .navbar { padding: 0 18px; height: 60px; }
+    .navbar       { padding: 0 18px; height: 60px; }
     .nav-divider  { display: none; }
     .nav-tagline  { display: none; }
-    .hire-btn     { padding: 7px 16px; font-size: 10px; letter-spacing: 1.5px; }
 
-    /* Hero */
-    .hero {
-        flex-direction: column;
-        height: auto;
-    }
+    /* Hero — phone-width video with gaps above and below */
+    .hero               { height: auto; padding: 0 16px; margin-top: 76px; margin-bottom: 32px; }
+    .hero-video         { height: auto; }
+    .hero-video video   { position: static; width: 100%; height: auto; object-fit: unset; }
+    .page-content       { margin-top: 0; }
 
-    .hero-panel {
-        padding: 28px 16px;
-        min-height: 180px;
-    }
-
-    .hero-video {
-        flex: 0 0 auto;
-        width: 100%;
-        height: 240px;
-        position: relative;
-    }
-
-    .vertical-label span {
-        font-size: 52px;
-    }
-
-    /* Content */
+    /* Intro */
     .breadcrumb-wrap { padding: 18px 20px 0; }
-    .qf-intro        { padding: 40px 20px 30px; }
-    .features        { padding: 0 20px 40px; }
+    .qf-intro        { padding: 36px 20px 28px; }
+    .qf-title        { font-size: clamp(28px, 7vw, 40px); }
+    .qf-desc         { font-size: 14px; }
 
+    /* Features */
+    .features { padding: 0 20px 36px; }
     .feat-row {
-        flex-wrap: wrap;
-        padding: 30px 0;
-        gap: 16px;
+        padding: 24px 0;
+        gap: 12px;
     }
-
-    .feat-icon-col {
-        flex: 0 0 56px;
-    }
-
-    .feat-vline-wrap {
-        height: 56px;
-        margin: 0 18px;
-    }
+    .feat-icon-col  { flex: 0 0 48px; }
+    .feat-icon      { width: 48px; height: 48px; }
+    .feat-vline-wrap { height: 52px; margin: 0 14px; }
+    .feat-title     { font-size: 16px; }
+    .feat-desc      { font-size: 13px; }
 
     /* Gallery */
-    .gallery-section { padding: 50px 20px 40px; }
-    .video-grid { grid-template-columns: 1fr; gap: 16px; }
+    .gallery-section { padding: 40px 20px 32px; }
+    .video-grid      { grid-template-columns: 1fr; gap: 12px; }
+    .photo-grid      { grid-template-columns: 1fr; gap: 12px; }
 
     /* Projects */
-    .projects-section { padding: 40px 20px 60px; }
-
+    .projects-section { padding: 36px 20px 52px; }
     .project-row {
         grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 36px 0;
+        gap: 16px;
+        padding: 28px 0;
     }
+    .proj-img-col.proj-img-placeholder { height: 220px; }
 
-    .proj-desc { text-align: left; }
-
-    
+    /* Footer */
+    .site-footer         { padding: 40px 20px 0; }
+    .footer-nav          { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .footer-nav a        { font-size: 11px; }
+    .footer-newsletter-btn { padding: 13px 24px; font-size: 10px; letter-spacing: 2px; }
+    .footer-social a     { width: 38px; height: 38px; }
+    .footer-social svg   { width: 15px; height: 15px; }
+    .footer-divider      { margin: 0 -20px; }
+    .footer-bottom       { font-size: 10px; flex-direction: column; gap: 8px; text-align: center; padding: 18px 0; }
 
     .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
 }
@@ -926,10 +843,14 @@ a {
    RESPONSIVE — SMALL MOBILE (≤480px)
    ============================================================ */
 @media (max-width: 480px) {
-    .vertical-label span { font-size: 38px; }
-    .label-gap { height: 12px; }
-    .hero-panel { min-height: 140px; }
-    .hero-video { height: 200px; }
+    .hero      { margin-top: 68px; margin-bottom: 24px; padding: 0 12px; }
+    .hero-video video { position: static; width: 100%; height: auto; object-fit: unset; }
+    .qf-title  { font-size: 26px; }
+    .sec-heading { font-size: 24px; }
+    .feat-row  { gap: 8px; }
+    .feat-icon-col { flex: 0 0 40px; }
+    .feat-icon     { width: 40px; height: 40px; }
+    .feat-vline-wrap { margin: 0 10px; }
 }
     </style>
 </head>
@@ -947,31 +868,15 @@ a {
                 <div class="nav-divider"></div>
                 <span class="nav-tagline">TRANSFORMING SPORTS BROADCAST</span>
             </div>
-            <div class="nav-right">
-                <a href="#" class="hire-btn">HIRE US</a>
-                <button class="hamburger" id="hamburger" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Magiq360</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </div>
 
     <!-- ======================== HERO: THREE-PANEL VIDEO ======================== -->
     <section class="hero">
         <div class="hero-video">
-            <video src="Magic 360 static.mp4" autoplay loop muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;"></video>
-        </div>
+<video src="Magic 360 Hero.mp4" autoplay loop muted playsinline
+  style="width:100%;height:auto;display:block;">
+</video>        </div>
 
         
     </section>
@@ -1122,41 +1027,34 @@ a {
                 <!-- Project 1 -->
                 <div class="project-row">
                     <div class="proj-img-col">
-                        <!--
-                            Replace with actual project image: assets/project-1.jpg
-                            (e.g. KKR diving catch — Camera Fly close-up angle)
-                        -->
-                        <img src="assets/project-1.jpg" alt="Magiq360 — KKR diving catch, IPL 2024"
+                        <img src="assets/project-1.jpg" alt="Magiq360 — KKR diving catch"
                              onerror="this.parentElement.classList.add('proj-img-placeholder')">
                     </div>
                     <div class="proj-text-col">
                         <div class="proj-gold-accent"></div>
                         <span class="proj-tag">MAGIQ360</span>
-                        <p class="proj-desc">Magiq360's Camera Fly technology captured a spectacular diving catch during the IPL 2024 season, synthetically generating intermediate frames between two separate camera feeds to deliver a seamless cinematic transition that froze the moment in time from multiple perspectives.</p>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
                 <div class="project-row">
                     <div class="proj-img-col">
-                        <img src="assets/project-2.jpg" alt="Magiq360 — Wide-angle fielding replay, IPL 2024"
+                        <img src="assets/project-2.jpg" alt="Magiq360 — Wide-angle fielding replay"
                              onerror="this.parentElement.classList.add('proj-img-placeholder')">
                     </div>
                     <div class="proj-text-col">
                         <span class="proj-tag">MAGIQ360</span>
-                        <p class="proj-desc">Quidich demonstrates how Magiq360 transforms a standard fielding replay into a high-end cinematic sequence — panning across the best available camera perspectives while the action is frozen, elevating the visual drama for broadcast audiences worldwide.</p>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
                 <div class="project-row">
                     <div class="proj-img-col">
-                        <img src="assets/project-3.jpg" alt="Magiq360 — Multi-angle run-out transition, IPL 2024"
+                        <img src="assets/project-3.jpg" alt="Magiq360 — Multi-angle run-out transition"
                              onerror="this.parentElement.classList.add('proj-img-placeholder')">
                     </div>
                     <div class="proj-text-col">
                         <span class="proj-tag">MAGIQ360</span>
-                        <p class="proj-desc">Quidich showcases how Magiq360's AI engine works seamlessly with a broadcaster's existing camera layout — requiring no additional hardware — to produce live, camera-agnostic cinematic transitions that are optimised for the high-pressure demands of live cricket production.</p>
                     </div>
                 </div>
 
@@ -1234,8 +1132,6 @@ a {
     'use strict';
 
     const navbar      = document.getElementById('navbar');
-    const hamburger   = document.getElementById('hamburger');
-    const mobileMenu  = document.getElementById('mobileMenu');
     const scrollTopBtn = document.getElementById('scrollTop');
     const logoImg     = document.querySelector('.logo-img');
     const logoFallback = document.getElementById('logoFallback');
@@ -1331,28 +1227,6 @@ a {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    /* ── Hamburger / mobile menu ────────────────────────────── */
-    hamburger.addEventListener('click', function (e) {
-        e.stopPropagation();
-        const isOpen = mobileMenu.classList.toggle('open');
-        hamburger.classList.toggle('open', isOpen);
-    });
-
-    /* Close menu when clicking outside */
-    document.addEventListener('click', function (e) {
-        if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
-            mobileMenu.classList.remove('open');
-            hamburger.classList.remove('open');
-        }
-    });
-
-    /* Close menu on link click */
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
-            mobileMenu.classList.remove('open');
-            hamburger.classList.remove('open');
-        });
-    });
 
 })();
     </script>
